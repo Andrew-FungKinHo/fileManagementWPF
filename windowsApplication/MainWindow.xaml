@@ -5,11 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:windowsApplication"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="1000" >
+        Title="MainWindow" Height="450" Width="1000" WindowStartupLocation="CenterScreen">
     <Grid>
         <Label x:Name="LblUsers" Content="User(s): 0" HorizontalAlignment="Left" 
                Margin="5,0,0,0" VerticalAlignment="Top" FontSize="20" FontWeight="Bold"/>
-        <DataGrid x:Name="dgUsers"  Margin="0,40,475,10" IsReadOnly="True" CanUserAddRows="False"/>
+        <DataGrid x:Name="dgUsers"  Margin="0,40,475,10" IsReadOnly="True" CanUserAddRows="False">
+            <DataGrid.Resources>
+                <Style TargetType="DataGridRow">
+                    <EventSetter Event="MouseDoubleClick" Handler="DataGridRow_MouseDoubleClick"/>
+                </Style>
+            </DataGrid.Resources>
+        </DataGrid>
         <Button x:Name="BtnExit" Content="Exit" HorizontalAlignment="Left" Margin="914,9,0,0" VerticalAlignment="Top" Height="25" Width="52" Click="BtnExit_Click"/>
         <Button x:Name="BtnGetUsers" Content="Get Users" HorizontalAlignment="Left" Margin="319,9,0,0" VerticalAlignment="Top" Click="BtnGetUsers_Click" Height="25" Width="78"/>
         <TextBox x:Name="TbxUserName" HorizontalAlignment="Left" Margin="186,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="25"/>

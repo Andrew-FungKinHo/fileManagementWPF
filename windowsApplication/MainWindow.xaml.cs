@@ -185,5 +185,14 @@ namespace windowsApplication
             context.SaveChanges();
             MessageBox.Show("Saved changes to SQL database.");
         }
+
+        private void DataGridRow_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            var row = sender as DataGridRow;
+            var user = row.DataContext as User;
+            var editUser = new EditUser();
+            editUser.Owner = this;
+            editUser.ShowUser(user);
+        }
     }
 }

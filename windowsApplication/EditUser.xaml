@@ -1,0 +1,39 @@
+﻿<Window x:Class="windowsApplication.EditUser"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:windowsApplication"
+        mc:Ignorable="d"
+        Title="Edit User" Height="400" Width="400" WindowStartupLocation="CenterScreen">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="140*"></RowDefinition>
+            <RowDefinition Height="50*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="50*"></ColumnDefinition>
+            <ColumnDefinition Width="150*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Label Content="Create/Edit User" HorizontalAlignment="Left" FontSize="20" Grid.Column="0" 
+               FontWeight="Bold" Grid.ColumnSpan="2" Width="400" Margin="0,0,0,163"></Label>
+
+        <Label x:Name="lblUserId" Content="User ID:" HorizontalAlignment="Right" Margin="0,35,0,0" VerticalAlignment="Top" Height="25"/>
+        <TextBox x:Name="TbxUserId" HorizontalAlignment="Left" Margin="11,35,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="224" Grid.Column="1" Height="25" IsReadOnly="True"/>
+        <Label x:Name="lblUserName" Content="User Name:" HorizontalAlignment="Right" Margin="0,78,0,0" VerticalAlignment="Top" Height="25"/>
+        <TextBox x:Name="TbxUserName" HorizontalAlignment="Left" Margin="11,78,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="224" Grid.Column="1" Height="25" />
+        <Label x:Name="lblEmailAddress" Content="Email:" HorizontalAlignment="Right" VerticalAlignment="Top" Height="25" Margin="0,120,0,0"/>
+        <TextBox x:Name="TbxEmailAddress" HorizontalAlignment="Left" Margin="11,120,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="224" Grid.Column="1" Height="25" />
+        <Label x:Name="lblPhone" Content="Phone:" HorizontalAlignment="Right" VerticalAlignment="Top" Height="25" Margin="0,164,0,0"/>
+        <TextBox x:Name="TbxPhone" HorizontalAlignment="Left" Margin="11,164,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="224" Grid.Column="1" Height="25" />
+
+        <Button x:Name="BtnSaveUser" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left"
+                Content="Save" Width="75" Margin="122,56,0,16" Click="BtnSaveUser_Click"/>
+
+        <Button x:Name="BtnCancelUser" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left"
+                Content="Cancel" Width="75" Margin="207,56,0,16" Click="BtnCancelUser_Click"/>
+    </Grid>
+</Window>
