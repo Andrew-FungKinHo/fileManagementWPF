@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +14,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using windowsApp.Models;
+using windowsApplication.Data;
 
 namespace windowsApplication
 {
@@ -20,6 +24,7 @@ namespace windowsApplication
     /// </summary>
     public partial class MainWindow : Window
     {
+        List<User> users = new List<User>();
         public MainWindow()
         {
             InitializeComponent();
@@ -32,7 +37,14 @@ namespace windowsApplication
 
         private void BtnGetUsers_Click(object sender, RoutedEventArgs e)
         {
-            Application.Current.Shutdown();
+            GetUsers();
+        }
+
+        void GetUsers()
+        {
+            var db = new windowsAppContext();
+            users = db.Users.ToList();
+            dgUsers.ItemsSource = users;
         }
     }
 }
