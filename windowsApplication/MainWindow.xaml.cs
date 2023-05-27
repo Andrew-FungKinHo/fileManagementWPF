@@ -26,15 +26,16 @@ namespace windowsApplication
     public partial class MainWindow : Window
     {
         List<User> users = new List<User>();
+        List<AppFile> appFiles = new List<AppFile>();
         public MainWindow()
         {
             InitializeComponent();
 
             // Filepath concerned
-            var filePath = "C:\\Users\\User\\Desktop\\pulsenics\\windowsApplication\\windowsApplication\\testDirectory";
+            // var filePath = "C:\\Users\\User\\Desktop\\pulsenics\\windowsApplication\\windowsApplication\\testDirectory";
 
             // Task B: Save filename and details into SQL database
-            SaveFilesDetails(filePath);
+            // SaveFilesDetails(filePath);
         }
 
         private void BtnExit_Click(object sender, RoutedEventArgs e)
@@ -53,7 +54,17 @@ namespace windowsApplication
             users = db.Users.ToList();
             dgUsers.ItemsSource = users;
         }
-
+        // Task A: List all the files inside the folder based on the AppFiles SQL database
+        private void BtnGetAppFiles_Click(object sender, RoutedEventArgs e)
+        {
+            GetAppFiles();
+        }
+        void GetAppFiles()
+        {
+            var db = new windowsAppContext();
+            appFiles = db.AppFiles.ToList();
+            dgAppFiles.ItemsSource = appFiles;
+        }
         void SaveFilesDetails(string path)
         {
             var context = new windowsAppContext();
