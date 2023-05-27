@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Configuration;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -27,9 +28,24 @@ namespace windowsApplication
     {
         List<User> users = new List<User>();
         List<AppFile> appFiles = new List<AppFile>();
+        private FileSystemWatcher watcher = new FileSystemWatcher();
         public MainWindow()
         {
             InitializeComponent();
+            // Filepath concerned
+            watcher.Path = "C:\\Users\\User\\Desktop\\pulsenics\\windowsApplication\\windowsApplication\\testDirectory";
+            // Assumption: We only want to be notified of changes to file names, directory names, and when files are written to.
+            watcher.NotifyFilter = NotifyFilters.LastWrite | NotifyFilters.FileName | NotifyFilters.DirectoryName;
+
+            // Add event handlers.
+            watcher.Created += OnChanged;
+            watcher.Changed += OnChanged;
+            watcher.Deleted += OnChanged;
+            watcher.Renamed += OnChanged;
+
+            // Start monitoring.
+            watcher.EnableRaisingEvents = true;
+
 
             // Filepath concerned
             // var filePath = "C:\\Users\\User\\Desktop\\pulsenics\\windowsApplication\\windowsApplication\\testDirectory";
@@ -37,8 +53,17 @@ namespace windowsApplication
             // Task B: Save filename and details into SQL database
             // SaveFilesDetails(filePath);
         }
-
-        private void BtnExit_Click(object sender, RoutedEventArgs e)
+        void OnChanged(object sender, FileSystemEventArgs e)
+        {
+            // Task G: If a file is changed, the application should know the details (name, extension, created date, last modified date) and update the modified date.
+            FileInfo fileInfo = new FileInfo(e.FullPath);
+            MessageBox.Show($"File: {e.FullPath} {e.ChangeType} " + 
+                $"Name: {fileInfo.Name} " +
+                $"Extension: {fileInfo.Extension} " +
+                $"Created: {fileInfo.CreationTime} " +
+                $"Last Modified: {fileInfo.LastWriteTime} ");
+        }
+            private void BtnExit_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
         }
