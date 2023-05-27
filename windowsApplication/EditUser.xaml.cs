@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -39,6 +40,15 @@ namespace windowsApplication
             Show();
         }
 
+        public void ShowEmptyUserForm()
+        {
+            TbxUserId.Text = "";
+            TbxUserName.Text = "";
+            TbxEmailAddress.Text = "";
+            TbxPhone.Text = "";
+            Show();
+        }
+
         private void BtnCancelUser_Click(object sender, RoutedEventArgs e)
         {
             Close();
@@ -47,6 +57,7 @@ namespace windowsApplication
         private void BtnSaveUser_Click(object sender, RoutedEventArgs e)
         {
             var context = new windowsAppContext();
+
             // update database entry for this recenetly updated user. 
             var updateUserConcerned = context.Users
                             .Where(p => p.Id.ToString() == TbxUserId.Text.ToString())
@@ -57,6 +68,23 @@ namespace windowsApplication
                 updateUserConcerned.Name = TbxUserName.Text;
                 updateUserConcerned.EmailAddress = TbxEmailAddress.Text;
                 updateUserConcerned.Phone = TbxPhone.Text;
+            }
+            else
+            {
+                // create a new database entry for this newly created file.
+                User newUser = new User();
+                if (string.IsNullOrEmpty(TbxUserName.Text) == false && string.IsNullOrEmpty(TbxEmailAddress.Text) == false && string.IsNullOrEmpty(TbxPhone.Text) == false)
+                {
+                    newUser.Name = TbxUserName.Text;
+                    newUser.EmailAddress = TbxEmailAddress.Text;
+                    newUser.Phone = TbxPhone.Text;
+                    context.Users.Add(newUser);
+                }
+                else
+                {
+                    MessageBox.Show("Cannot leave one or more field empty.");
+                }
+                
             }
             context.SaveChanges();
             Close();

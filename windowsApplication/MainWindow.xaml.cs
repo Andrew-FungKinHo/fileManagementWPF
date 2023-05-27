@@ -129,7 +129,12 @@ namespace windowsApplication
         {
             Application.Current.Shutdown();
         }
-
+        private void BtnCreateUser_Click(object sender, RoutedEventArgs e)
+        {
+            var editUser = new EditUser();
+            editUser.Owner = this;
+            editUser.ShowEmptyUserForm();
+        }
         private void BtnGetUsers_Click(object sender, RoutedEventArgs e)
         {
             GetUsers();
