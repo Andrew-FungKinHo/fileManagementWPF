@@ -46,12 +46,8 @@ namespace windowsApplication
             // Start monitoring.
             watcher.EnableRaisingEvents = true;
 
-
-            // Filepath concerned
-            // var filePath = "C:\\Users\\User\\Desktop\\pulsenics\\windowsApplication\\windowsApplication\\testDirectory";
-
             // Task B: Save filename and details into SQL database
-            // SaveFilesDetails(filePath);
+            // SaveFilesDetails(watcher.Path);
         }
         void OnChanged(object sender, FileSystemEventArgs e)
         {
@@ -93,7 +89,6 @@ namespace windowsApplication
                 case WatcherChangeTypes.Deleted:
                     // remove the database entry for this recently deleted file.
                     String deletedFileName = System.IO.Path.GetFileName(e.FullPath);
-                    MessageBox.Show($"File Name : {deletedFileName}");
                     var deletedFileConcerned = context.AppFiles
                                     .Where(p => p.FileName == deletedFileName)
                                     .FirstOrDefault();
