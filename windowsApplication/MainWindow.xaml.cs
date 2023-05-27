@@ -55,15 +55,82 @@ namespace windowsApplication
         }
         void OnChanged(object sender, FileSystemEventArgs e)
         {
-            // Task G: If a file is changed, the application should know the details (name, extension, created date, last modified date) and update the modified date.
+            // Task F: When a file is changed outside the application, we need to automatically update the database information.
+            // Show that a file has been changed, created, or deleted.
+            // Example: "File: file\path\to\file Created"
+            var context = new windowsAppContext();
             FileInfo fileInfo = new FileInfo(e.FullPath);
-            MessageBox.Show($"File: {e.FullPath} {e.ChangeType} " + 
-                $"Name: {fileInfo.Name} " +
-                $"Extension: {fileInfo.Extension} " +
-                $"Created: {fileInfo.CreationTime} " +
-                $"Last Modified: {fileInfo.LastWriteTime} ");
+            MessageBox.Show($"File: {e.FullPath} {e.ChangeType} ");
+            switch (e.ChangeType)
+            {
+                case WatcherChangeTypes.Changed:
+                    // update database entry for this recenetly updated file. 
+                    var changedFileConcerned = context.AppFiles
+                                    .Where(p => p.FileCreatedTime == fileInfo.CreationTime)
+                                    .FirstOrDefault();
+
+                    if (changedFileConcerned is AppFile)
+                    {
+                        changedFileConcerned.FileName = fileInfo.Name;
+                        changedFileConcerned.FileExtension = fileInfo.Extension;
+                        changedFileConcerned.FileCreatedTime = fileInfo.CreationTime;
+                        changedFileConcerned.FileLastModifiedTime = fileInfo.LastWriteTime;
+                    }
+                    context.SaveChanges();
+                    break;
+                case WatcherChangeTypes.Created:
+                    // create a new database entry for this newly created file.
+                    AppFile newFile = new AppFile()
+                    {
+                        FileName = fileInfo.Name,
+                        FileExtension = fileInfo.Extension,
+                        FileCreatedTime = fileInfo.CreationTime,
+                        FileLastModifiedTime = fileInfo.LastWriteTime
+                    };
+                    context.AppFiles.Add(newFile);
+                    context.SaveChanges();
+                    break;
+                case WatcherChangeTypes.Deleted:
+                    // remove the database entry for this recently deleted file.
+                    String deletedFileName = System.IO.Path.GetFileName(e.FullPath);
+                    MessageBox.Show($"File Name : {deletedFileName}");
+                    var deletedFileConcerned = context.AppFiles
+                                    .Where(p => p.FileName == deletedFileName)
+                                    .FirstOrDefault();
+                    if (deletedFileConcerned is AppFile)
+                    {
+                        context.Remove(deletedFileConcerned);
+                    }
+                    context.SaveChanges();
+
+                    break;
+                case WatcherChangeTypes.Renamed:
+                    // update database entry for this recenetly updated file. 
+                    var renamedFileConcerned = context.AppFiles
+                                    .Where(p => p.FileCreatedTime == fileInfo.CreationTime)
+                                    .FirstOrDefault();
+
+                    if (renamedFileConcerned is AppFile)
+                    {
+                        renamedFileConcerned.FileName = fileInfo.Name;
+                        renamedFileConcerned.FileExtension = fileInfo.Extension;
+                        renamedFileConcerned.FileCreatedTime = fileInfo.CreationTime;
+                        renamedFileConcerned.FileLastModifiedTime = fileInfo.LastWriteTime;
+                    }
+                    context.SaveChanges();
+                    break;
+                default:
+                    // Task G: If a file is changed, the application should know the details (name, extension, created date, last modified date) and update the modified date.
+                    MessageBox.Show($"File: {e.FullPath} {e.ChangeType} " +
+                    $"Name: {fileInfo.Name} " +
+                    $"Extension: {fileInfo.Extension} " +
+                    $"Created: {fileInfo.CreationTime} " +
+                    $"Last Modified: {fileInfo.LastWriteTime} ");
+                    break;
+            }
+
         }
-            private void BtnExit_Click(object sender, RoutedEventArgs e)
+        private void BtnExit_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
         }
