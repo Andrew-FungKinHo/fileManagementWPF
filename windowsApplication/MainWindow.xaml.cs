@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,6 +29,12 @@ namespace windowsApplication
         public MainWindow()
         {
             InitializeComponent();
+
+            // Filepath concerned
+            var filePath = "C:\\Users\\User\\Desktop\\pulsenics\\windowsApplication\\windowsApplication\\testDirectory";
+
+            // Task B: Save filename and details into SQL database
+            SaveFilesDetails(filePath);
         }
 
         private void BtnExit_Click(object sender, RoutedEventArgs e)
@@ -39,12 +46,31 @@ namespace windowsApplication
         {
             GetUsers();
         }
-
+       
         void GetUsers()
         {
             var db = new windowsAppContext();
             users = db.Users.ToList();
             dgUsers.ItemsSource = users;
+        }
+
+        void SaveFilesDetails(string path)
+        {
+            var context = new windowsAppContext();
+            DirectoryInfo directory = new DirectoryInfo(path);
+            foreach (var file in directory.GetFiles())
+            {
+                AppFile directoryFile = new AppFile()
+                {
+                    FileName = file.Name,
+                    FileExtension = file.Extension,
+                    FileCreatedTime = file.CreationTime,
+                    FileLastModifiedTime = file.LastWriteTime
+                };
+                context.AppFiles.Add(directoryFile);
+            }
+            context.SaveChanges();
+            MessageBox.Show("Saved changes to SQL database.");
         }
     }
 }
