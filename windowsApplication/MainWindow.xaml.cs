@@ -53,6 +53,7 @@ namespace windowsApplication
             var db = new windowsAppContext();
             users = db.Users.ToList();
             dgUsers.ItemsSource = users;
+            LblUsers.Content = $"User(s): {users.Count()}";
         }
         // Task A: List all the files inside the folder based on the AppFiles SQL database
         private void BtnGetAppFiles_Click(object sender, RoutedEventArgs e)
@@ -63,7 +64,21 @@ namespace windowsApplication
         {
             var db = new windowsAppContext();
             appFiles = db.AppFiles.ToList();
-            dgAppFiles.ItemsSource = appFiles;
+
+            // Task C: Search files by filename from the filename textbox input
+
+            if (string.IsNullOrEmpty(TbxFileName.Text))
+            {
+                var filtered = appFiles.Where(file => file.FileName.ToLower().Contains(TbxFileName.Text.ToLower()));
+                dgAppFiles.ItemsSource = filtered;
+                LblAppFiles.Content = $"File(s): {filtered.Count()}";
+            }
+            else
+            {
+                dgAppFiles.ItemsSource = appFiles;
+                LblAppFiles.Content = $"File(s): {appFiles.Count()}";
+            }
+            
         }
         void SaveFilesDetails(string path)
         {

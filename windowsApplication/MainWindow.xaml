@@ -5,18 +5,19 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:windowsApplication"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" >
+        Title="MainWindow" Height="450" Width="1000" >
     <Grid>
         <Label x:Name="LblUsers" Content="User(s): 0" HorizontalAlignment="Left" 
                Margin="5,0,0,0" VerticalAlignment="Top" FontSize="20" FontWeight="Bold"/>
-        <DataGrid x:Name="dgUsers"  Margin="0,40,400,10"/>
-        <Button x:Name="BtnExit" Content="Exit" HorizontalAlignment="Left" Margin="714,9,0,0" VerticalAlignment="Top" Height="25" Width="52" Click="BtnExit_Click"/>
+        <DataGrid x:Name="dgUsers"  Margin="0,40,475,10" IsReadOnly="True" CanUserAddRows="False"/>
+        <Button x:Name="BtnExit" Content="Exit" HorizontalAlignment="Left" Margin="914,9,0,0" VerticalAlignment="Top" Height="25" Width="52" Click="BtnExit_Click"/>
         <Button x:Name="BtnGetUsers" Content="Get Users" HorizontalAlignment="Left" Margin="319,9,0,0" VerticalAlignment="Top" Click="BtnGetUsers_Click" Height="25" Width="78"/>
-        <TextBox x:Name="TbxUserId" HorizontalAlignment="Left" Margin="186,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="25"/>
+        <TextBox x:Name="TbxUserName" HorizontalAlignment="Left" Margin="186,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="25"/>
         <Label x:Name="LblUserName" Content="User Name:" HorizontalAlignment="Left" Margin="113,10,0,0" VerticalAlignment="Top" FontWeight="Bold" Height="25"/>
-        <TextBox x:Name="TbxUserName" HorizontalAlignment="Left" Margin="479,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="25"/>
-        <Label x:Name="LblFileName" Content="File Name:" HorizontalAlignment="Left" Margin="404,10,0,0" VerticalAlignment="Top" FontWeight="Bold" Height="25"/>
-        <Button x:Name="BtnGetAppFiles" Content="Get Files" HorizontalAlignment="Left" Margin="611,9,0,0" VerticalAlignment="Top" Click="BtnGetAppFiles_Click" Height="25" Width="78"/>
-        <DataGrid x:Name="dgAppFiles" Margin="401,40,4,10"/>
+        <TextBox x:Name="TbxFileName" HorizontalAlignment="Left" Margin="679,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="25"/>
+        <Label x:Name="LblFileName" Content="File Name:" HorizontalAlignment="Left" Margin="605,10,0,0" VerticalAlignment="Top" FontWeight="Bold" Height="25"/>
+        <Button x:Name="BtnGetAppFiles" Content="Get Files" HorizontalAlignment="Left" Margin="811,9,0,0" VerticalAlignment="Top" Click="BtnGetAppFiles_Click" Height="25" Width="78"/>
+        <DataGrid x:Name="dgAppFiles" Margin="475,40,4,10" IsReadOnly="True" CanUserAddRows="False"/>
+        <Label x:Name="LblAppFiles" Content="File(s): 0" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="20" FontWeight="Bold" Margin="483,0,0,0"/>
     </Grid>
 </Window>
