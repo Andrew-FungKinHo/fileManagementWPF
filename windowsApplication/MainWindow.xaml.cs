@@ -45,9 +45,6 @@ namespace windowsApplication
 
             // Start monitoring.
             watcher.EnableRaisingEvents = true;
-
-            // Task B: Save filename and details into SQL database
-            // SaveFilesDetails(watcher.Path);
         }
         void OnChanged(object sender, FileSystemEventArgs e)
         {
@@ -198,6 +195,16 @@ namespace windowsApplication
             var editUser = new EditUser();
             editUser.Owner = this;
             editUser.ShowUser(user);
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            // Task B: Save filename and details into SQL database
+            // SaveFilesDetails("C:\\Users\\User\\Desktop\\pulsenics\\windowsApplication\\windowsApplication\\testDirectory");
+
+            GetUsers();
+            GetAppFiles();
+
         }
     }
 }
