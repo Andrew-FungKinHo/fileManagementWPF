@@ -188,7 +188,7 @@ namespace windowsApplication
             MessageBox.Show("Saved changes to SQL database.");
         }
 
-        private void DataGridRow_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void DgRowUsers_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             var row = sender as DataGridRow;
             var user = row.DataContext as User;
@@ -206,5 +206,15 @@ namespace windowsApplication
             GetAppFiles();
 
         }
+
+        private void DgRowAppFiles_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            var row = sender as DataGridRow;
+            var appfile = row.DataContext as AppFile;
+            var editAppFile = new EditAppFile();
+            editAppFile.Owner = this;
+            editAppFile.ShowAppFile(appfile);
+        }
+    
     }
 }

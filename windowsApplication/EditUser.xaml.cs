@@ -65,9 +65,19 @@ namespace windowsApplication
 
             if (updateUserConcerned is User)
             {
-                updateUserConcerned.Name = TbxUserName.Text;
-                updateUserConcerned.EmailAddress = TbxEmailAddress.Text;
-                updateUserConcerned.Phone = TbxPhone.Text;
+                if (string.IsNullOrEmpty(TbxUserName.Text) == false && string.IsNullOrEmpty(TbxEmailAddress.Text) == false && string.IsNullOrEmpty(TbxPhone.Text) == false)
+                {
+                    updateUserConcerned.Name = TbxUserName.Text;
+                    updateUserConcerned.EmailAddress = TbxEmailAddress.Text;
+                    updateUserConcerned.Phone = TbxPhone.Text;
+                    context.SaveChanges();
+                }
+                else
+                {
+                    MessageBox.Show("Cannot leave one or more field empty.");
+                    
+                }
+                Close();
             }
             else
             {
@@ -79,15 +89,14 @@ namespace windowsApplication
                     newUser.EmailAddress = TbxEmailAddress.Text;
                     newUser.Phone = TbxPhone.Text;
                     context.Users.Add(newUser);
+                    context.SaveChanges();
                 }
                 else
                 {
                     MessageBox.Show("Cannot leave one or more field empty.");
                 }
-                
+                Close();
             }
-            context.SaveChanges();
-            Close();
         }
     }
 }

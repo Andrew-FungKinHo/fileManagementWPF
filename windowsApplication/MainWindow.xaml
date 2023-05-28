@@ -12,7 +12,7 @@
         <DataGrid x:Name="dgUsers"  Margin="0,40,475,10" IsReadOnly="True" CanUserAddRows="False">
             <DataGrid.Resources>
                 <Style TargetType="DataGridRow">
-                    <EventSetter Event="MouseDoubleClick" Handler="DataGridRow_MouseDoubleClick"/>
+                    <EventSetter Event="MouseDoubleClick" Handler="DgRowUsers_MouseDoubleClick"/>
                 </Style>
             </DataGrid.Resources>
         </DataGrid>
@@ -21,7 +21,13 @@
         <TextBox x:Name="TbxFileName" HorizontalAlignment="Left" Margin="719,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="25"/>
         <Label x:Name="LblFileName" Content="File Name:" HorizontalAlignment="Left" Margin="645,10,0,0" VerticalAlignment="Top" FontWeight="Bold" Height="25"/>
         <Button x:Name="BtnGetAppFiles" Content="Get Files" HorizontalAlignment="Left" Margin="847,9,0,0" VerticalAlignment="Top" Click="BtnGetAppFiles_Click" Height="25" Width="78"/>
-        <DataGrid x:Name="dgAppFiles" Margin="475,40,4,10" IsReadOnly="True" CanUserAddRows="False"/>
+        <DataGrid x:Name="dgAppFiles" Margin="475,40,4,10" IsReadOnly="True" CanUserAddRows="False">
+            <DataGrid.Resources>
+                <Style TargetType="DataGridRow">
+                    <EventSetter Event="MouseDoubleClick" Handler="DgRowAppFiles_MouseDoubleClick"/>
+                </Style>
+            </DataGrid.Resources>
+        </DataGrid>
         <Label x:Name="LblAppFiles" Content="File(s): 0" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="20" FontWeight="Bold" Margin="551,0,0,0"/>
         <Button x:Name="BtnCreateUser" Content="Create User" HorizontalAlignment="Left" Margin="219,9,0,0" VerticalAlignment="Top" Click="BtnCreateUser_Click" Height="25" Width="78"/>
     </Grid>
