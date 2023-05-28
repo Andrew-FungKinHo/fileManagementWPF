@@ -10,6 +10,6 @@ namespace windowsApp.Models
         public string EmailAddress { get; set; } = null!;
 
         public string Phone { get; set; } = null!;
-        public ICollection<AppFile>? FilesAssigned { get; set; }
+        public AppFile? FileAssigned { get; set; }
     }
 }

@@ -73,23 +73,11 @@ namespace windowsApplication
                 if (selectedItem is User user)
                 {
                     // update database entry for this recenetly updated user. 
-                    var assignedUserConcerned = context.Users
-                                    .Where(u => u.Id == user.Id)
-                                    .FirstOrDefault();
                     var fileConcerned = context.AppFiles
-                                    .Where(f => f.Id == int.Parse(TbxAppFileId.Text))
+                                    .Where(f => f.FileName == TbxAppFileId.Text)
                                     .FirstOrDefault();
-                    
-                    if (assignedUserConcerned is User)
-                    {
-                        // create the collection of FilesAssigned and UsersAssigned if it doesn't exist
-                        if (assignedUserConcerned.FilesAssigned == null)
-                        {
-                            assignedUserConcerned.FilesAssigned = new List<AppFile>();
-                        }
-                        assignedUserConcerned.FilesAssigned.Add(fileConcerned);
-                        
-                    }
+                    // assign file to user
+                    user.FileAssigned = fileConcerned;
                     context.SaveChanges();
                     Close();
                 }

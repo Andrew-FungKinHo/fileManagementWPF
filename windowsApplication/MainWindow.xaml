@@ -9,7 +9,16 @@
     <Grid>
         <Label x:Name="LblUsers" Content="User(s): 0" HorizontalAlignment="Left" 
                Margin="5,0,0,0" VerticalAlignment="Top" FontSize="20" FontWeight="Bold"/>
-        <DataGrid x:Name="dgUsers"  Margin="0,40,475,10" IsReadOnly="True" CanUserAddRows="False">
+        <DataGrid x:Name="dgUsers"  Margin="0,40,475,10" IsReadOnly="True" CanUserAddRows="False" 
+                  ItemsSource="{Binding Users}" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id" Binding="{Binding Id}" />
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
+                <DataGridTextColumn Header="Email Address" Binding="{Binding EmailAddress}" />
+                <DataGridTextColumn Header="Phone" Binding="{Binding Phone}" />
+
+            </DataGrid.Columns>
+            
             <DataGrid.Resources>
                 <Style TargetType="DataGridRow">
                     <EventSetter Event="MouseDoubleClick" Handler="DgRowUsers_MouseDoubleClick"/>

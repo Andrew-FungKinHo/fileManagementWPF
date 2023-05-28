@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using windowsApplication.Data;
 
@@ -11,9 +12,11 @@ using windowsApplication.Data;
 namespace windowsApplication.Migrations
 {
     [DbContext(typeof(windowsAppContext))]
-    partial class windowsAppContextModelSnapshot : ModelSnapshot
+    [Migration("20230528183010_SingleFileAssigned")]
+    partial class SingleFileAssigned
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
