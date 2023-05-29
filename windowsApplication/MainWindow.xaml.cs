@@ -29,11 +29,12 @@ namespace windowsApplication
         List<User> users = new List<User>();
         List<AppFile> appFiles = new List<AppFile>();
         private FileSystemWatcher watcher = new FileSystemWatcher();
+        private string currentPath = "C:\\Users\\User\\Desktop\\pulsenics\\windowsApplication\\windowsApplication\\testDirectory";
         public MainWindow()
         {
             InitializeComponent();
             // Filepath concerned
-            watcher.Path = "C:\\Users\\User\\Desktop\\pulsenics\\windowsApplication\\windowsApplication\\testDirectory";
+            watcher.Path = currentPath;
             // Assumption: We only want to be notified of changes to file names, directory names, and when files are written to.
             watcher.NotifyFilter = NotifyFilters.LastWrite | NotifyFilters.FileName | NotifyFilters.DirectoryName;
 
@@ -200,8 +201,8 @@ namespace windowsApplication
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             // Task B: Save filename and details into SQL database
-            // SaveFilesDetails("C:\\Users\\User\\Desktop\\pulsenics\\windowsApplication\\windowsApplication\\testDirectory");
-
+            // SaveFilesDetails(currentPath);
+            LblCurrentPath.Content = $"Path: {currentPath}";
             GetUsers();
             GetAppFiles();
 

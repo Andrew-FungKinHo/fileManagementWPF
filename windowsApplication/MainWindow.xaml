@@ -8,7 +8,7 @@
         Title="MainWindow" Height="450" Width="1000" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen">
     <Grid>
         <Label x:Name="LblUsers" Content="User(s): 0" HorizontalAlignment="Left" 
-               Margin="5,0,0,0" VerticalAlignment="Top" FontSize="20" FontWeight="Bold"/>
+               Margin="1,10,0,0" VerticalAlignment="Top" FontSize="13" FontWeight="Bold"/>
         <DataGrid x:Name="dgUsers"  Margin="0,40,475,10" IsReadOnly="True" CanUserAddRows="False" 
                   ItemsSource="{Binding Users}" AutoGenerateColumns="False">
             <DataGrid.Columns>
@@ -18,18 +18,18 @@
                 <DataGridTextColumn Header="Phone" Binding="{Binding Phone}" />
 
             </DataGrid.Columns>
-            
+
             <DataGrid.Resources>
                 <Style TargetType="DataGridRow">
                     <EventSetter Event="MouseDoubleClick" Handler="DgRowUsers_MouseDoubleClick"/>
                 </Style>
             </DataGrid.Resources>
         </DataGrid>
-        <Button x:Name="BtnExit" Content="Exit" HorizontalAlignment="Left" Margin="932,9,0,0" VerticalAlignment="Top" Height="25" Width="52" Click="BtnExit_Click"/>
-        <Button x:Name="BtnGetUsers" Content="Get Users" HorizontalAlignment="Left" Margin="129,9,0,0" VerticalAlignment="Top" Click="BtnGetUsers_Click" Height="25" Width="78"/>
-        <TextBox x:Name="TbxFileName" HorizontalAlignment="Left" Margin="719,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="25"/>
-        <Label x:Name="LblFileName" Content="File Name:" HorizontalAlignment="Left" Margin="645,10,0,0" VerticalAlignment="Top" FontWeight="Bold" Height="25"/>
-        <Button x:Name="BtnGetAppFiles" Content="Get Files" HorizontalAlignment="Left" Margin="847,9,0,0" VerticalAlignment="Top" Click="BtnGetAppFiles_Click" Height="25" Width="78"/>
+        <Button x:Name="BtnExit" Content="Exit" HorizontalAlignment="Left" Margin="945,9,0,0" VerticalAlignment="Top" Height="25" Width="39" Click="BtnExit_Click"/>
+        <Button x:Name="BtnGetUsers" Content="Get Users" HorizontalAlignment="Left" Margin="71,11,0,0" VerticalAlignment="Top" Click="BtnGetUsers_Click" Height="25" Width="58"/>
+        <TextBox x:Name="TbxFileName" HorizontalAlignment="Left" Margin="749,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="25"/>
+        <Label x:Name="LblFileName" Content="File Name:" HorizontalAlignment="Left" Margin="677,10,0,0" VerticalAlignment="Top" FontWeight="Bold" Height="25"/>
+        <Button x:Name="BtnGetAppFiles" Content="Get Files" HorizontalAlignment="Left" Margin="876,9,0,0" VerticalAlignment="Top" Click="BtnGetAppFiles_Click" Height="25" Width="63"/>
         <DataGrid x:Name="dgAppFiles" Margin="475,40,4,10" IsReadOnly="True" CanUserAddRows="False">
             <DataGrid.Resources>
                 <Style TargetType="DataGridRow">
@@ -37,7 +37,8 @@
                 </Style>
             </DataGrid.Resources>
         </DataGrid>
-        <Label x:Name="LblAppFiles" Content="File(s): 0" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="20" FontWeight="Bold" Margin="551,0,0,0"/>
-        <Button x:Name="BtnCreateUser" Content="Create User" HorizontalAlignment="Left" Margin="219,9,0,0" VerticalAlignment="Top" Click="BtnCreateUser_Click" Height="25" Width="78"/>
+        <Label x:Name="LblAppFiles" Content="File(s): 0" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="13" FontWeight="Bold" Margin="619,9,0,0"/>
+        <Button x:Name="BtnCreateUser" Content="Create User" HorizontalAlignment="Left" Margin="135,11,0,0" VerticalAlignment="Top" Click="BtnCreateUser_Click" Height="25" Width="71"/>
+        <Label x:Name="LblCurrentPath" Content="Path: " HorizontalAlignment="Left" Margin="207,14,0,0" VerticalAlignment="Top" FontSize="9"/>
     </Grid>
 </Window>
