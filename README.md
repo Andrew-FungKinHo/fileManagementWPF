@@ -7,6 +7,29 @@ Project walkthrough: https://youtu.be/0t6L8D8Iv48
 2. go to the `MainWindow.xaml` and click run application
 3. To change the path that he system is monitoring (currently hardcoded), go to `MainWindow.xaml.cs` and change the private string currentPath.
 
+## Entity Diagram
+
+```mermaid
+erDiagram
+    AppFile ||--o{ User : assigns
+    User
+    AppFile {
+        int Id
+        string FileName
+        string FileExtension
+        timestamp FileCreatedTime
+        timestamp FileLastModifiedTime
+    }
+    User {
+        int Id
+        string Name
+        string EmailAddress
+        string Phone
+        int FileId
+    } 
+
+```
+
 ### Assumptions on requirements
 - The application will only track changes of files but not folders within the directory. It is because folders do not have file extension data, which is a required field in the AppFiles SQL Table.
 - The File assignment can only be done by Editing AppFile Window but not Edit User Window. This is to prevent Database conflict as two windows can make changes simultaneously.
